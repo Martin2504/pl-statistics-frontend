@@ -1,0 +1,21 @@
+body {
+    background-color: #FFFFFF; /* Red Green Blue  123456789abcdef  */
+}
+
+li span {
+    padding-right: 30px;
+}
+
+li {
+    padding-left: 30px;
+    list-style: none;
+    line-height: 2;
+}
+
+li:nth-child(odd) {
+    background-color: #EFEFEF;
+}
+
+.team-page {
+    color: blueviolet;
+}
