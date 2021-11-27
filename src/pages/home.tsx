@@ -11,7 +11,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
     return (
         <div>
-            <p>Hi form home</p>
+            <p>Hi from home</p>
             <Link to="/teams-table">go to Teams Table</Link>
         </div>
     )
