@@ -166,7 +166,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
 
                             {/* Recent Orders */}
-                            <Grid item xs={12}>
+                            <Grid item xs={6}>
                                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
                                     <Orders />
                                 </Paper>
