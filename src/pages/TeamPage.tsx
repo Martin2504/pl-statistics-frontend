@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import IPage from "../interfaces/page";
 import logging from "../config/logging";
-import {RouteComponentProps, withRouter, Link} from "react-router-dom";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
-const TeamPage: React.FunctionComponent<IPage & RouteComponentProps<any>> = props => {
+const TeamPage: React.FunctionComponent<IPage> = props => {
 
     const [team, setTeam] = useState({id: '', teamName: '', address: ''});
 
@@ -17,7 +17,8 @@ const TeamPage: React.FunctionComponent<IPage & RouteComponentProps<any>> = prop
     }
 
     useEffect(() => {
-        const id = props.match.params.number;
+        // const id = props.match.params.number;
+        const id = 0 // temporary ... router 6 passes props differently.
         logging.info(`Loading ${props.name}`);
         fetchFootballTeamById(id);
     }, [props]);
@@ -34,4 +35,4 @@ const TeamPage: React.FunctionComponent<IPage & RouteComponentProps<any>> = prop
     )
 }
 
-export default withRouter(TeamPage);
+export default TeamPage;

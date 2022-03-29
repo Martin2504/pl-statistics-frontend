@@ -1,6 +1,5 @@
 import React from "react";
 import IPage from "../interfaces/page";
-import {RouteComponentProps, withRouter} from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -32,7 +31,7 @@ const theme = createTheme();
 
 
 
-const  SignUp: React.FunctionComponent<IPage & RouteComponentProps<any>> = (props) => {
+const  SignUp: React.FunctionComponent<IPage> = (props) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -136,4 +135,4 @@ const  SignUp: React.FunctionComponent<IPage & RouteComponentProps<any>> = (prop
     );
 }
 
-export default withRouter(SignUp);
+export default SignUp;

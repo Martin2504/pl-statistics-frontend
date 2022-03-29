@@ -1,7 +1,12 @@
 import React, {useEffect} from 'react';
 import logging from "./config/logging";
-import {BrowserRouter, Route, RouteComponentProps, Switch} from "react-router-dom";
-import routes from "./config/routes";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import LayoutComponent from "./pages/LayoutComponent";
+import HomePage from "./pages/HomePage";
+import LeagueTable from "./pages/LeagueTable";
+import TeamPage from "./pages/TeamPage";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 
 const Application: React.FunctionComponent<{}> = props => {
 
@@ -9,27 +14,20 @@ const Application: React.FunctionComponent<{}> = props => {
         logging.info('Loading Application');
     }, [props])
 
-    return(
+    return (
         <div>
             <BrowserRouter>
-                <Switch>
-                    {routes.map((route, index) => {
-                        return (
-                            <Route
-                                key={index}
-                                path={route.path}
-                                exact={route.exact}
-                                render={(props: RouteComponentProps<any>) => (
-                                    <route.component
-                                        name={route.name}
-                                        {...props}
-                                        {...route.props}
-                                    />
-                                )}
-                            />
-                        )
-                    })}
-                </Switch>
+                <Routes>
+                    <Route path="/" element={<LayoutComponent/>}>
+                        <Route index element={<HomePage name={'Home Page'} />} />
+                        <Route path="league-table" >
+                            <Route index element={<LeagueTable name={'League Table'} />} />
+                            <Route path=":teamId" element={<TeamPage name={'League Table'} />} />
+                        </Route>
+                    </Route>
+                    <Route path="/sign-in" element={<SignIn name={"sign-in"} />} />
+                    <Route path="/sign-up" element={<SignUp name={"sign-up"} />} />
+                </Routes>
             </BrowserRouter>
         </div>
     )

@@ -1,6 +1,5 @@
 import React from "react";
 import IPage from "../interfaces/page";
-import {RouteComponentProps, withRouter} from "react-router-dom";
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -30,7 +29,7 @@ function Copyright(props: any) {
 
 const theme = createTheme();
 
-const SignIn: React.FunctionComponent<IPage & RouteComponentProps<any>> = (props) => {
+const SignIn: React.FunctionComponent<IPage> = (props) => {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -113,4 +112,4 @@ const SignIn: React.FunctionComponent<IPage & RouteComponentProps<any>> = (props
     )
 };
 
-export default withRouter(SignIn);
+export default SignIn;

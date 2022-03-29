@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import IPage from "../interfaces/page";
 import logging from "../config/logging";
-import {RouteComponentProps, withRouter, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 import axios from "axios";
 import FootballTeam from "../interfaces/FootballTeam";
 import "../assets/style/TeamTable.css"
 
-const TeamsTable: React.FunctionComponent<IPage & RouteComponentProps<any>> = props => {
+const LeagueTable: React.FunctionComponent<IPage> = props => {
 
     const [teamsList, setTeamsList] = useState([])
 
@@ -21,24 +21,14 @@ const TeamsTable: React.FunctionComponent<IPage & RouteComponentProps<any>> = pr
 
     useEffect(() => {
         logging.info(`Loading ${props.name}`);
-        fetchFootballTeams();
+        // fetchFootballTeams();
     }, [props]);
 
-    const teamsListElements = teamsList.map((footballTeam: FootballTeam) =>
-        <li>
-            <Link to={`/team/${footballTeam.id}`} >
-                <span>{footballTeam.id}</span>
-                <span>{footballTeam.teamName}</span>
-                <span>{footballTeam.address}</span>
-            </Link>
-        </li>
-    )
-
     return (
-        <ul>
-            {teamsListElements}
-        </ul>
+        <h3>
+            The League Table
+        </h3>
     )
 }
 
-export default withRouter(TeamsTable);
+export default LeagueTable;
