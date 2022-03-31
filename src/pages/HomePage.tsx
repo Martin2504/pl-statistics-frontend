@@ -40,7 +40,7 @@ const HomePage: React.FunctionComponent<IPage> = props => {
 
     return (
       <Grid item xs={12} display={'flex'} style={{
-          height: '100vh',
+          height: '100%',
       }}>
           <Grid item xs={4} style={{
             paddingRight: '20px'

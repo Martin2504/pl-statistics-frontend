@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import FootballTeam from "../interfaces/FootballTeam";
 import "../assets/style/TeamTable.css"
+import LeagueTableComponent from "./components/LeagueTableComponent";
 
 const LeagueTable: React.FunctionComponent<IPage> = props => {
 
@@ -25,9 +26,7 @@ const LeagueTable: React.FunctionComponent<IPage> = props => {
     }, [props]);
 
     return (
-        <h3>
-            The League Table
-        </h3>
+        <LeagueTableComponent name={'league-table'} />
     )
 }
 

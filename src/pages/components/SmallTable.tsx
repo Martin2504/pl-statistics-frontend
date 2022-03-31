@@ -2,18 +2,21 @@ import React, {FunctionComponent, useEffect, useState} from 'react';
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import FootballTeam from "../../interfaces/FootballTeam";
 import logging from "../../config/logging";
-import axios from "axios";
+import SmallTableRecord from "../../interfaces/SmallTableRecord";
+import {useNavigate} from "react-router-dom";
+import AuthService from "../../services/AuthService";
+import TeamsService from "../../services/TeamsService";
 
 interface OwnProps {
 }
 
 type Props = OwnProps;
 
-const token = 'eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjQ4NTk4MDI1LCJpYXQiOjE2NDg1ODAwMjV9.2--0I0cQ85Qn0w1RuU8kixjgesw1-uU96lOm7vb1AyA5q6W2dbMmTVyq9CxYCpNxU00wmWN46f_anHwqpkZxCA';
-
 const SmallTable: FunctionComponent<Props> = (props) => {
 
-  const [leagueStandings, setLeagueStandings] = useState([]);
+  const navigate = useNavigate();
+
+  const [leagueStandings, setLeagueStandings] = useState<FootballTeam[]>([]);
 
   const columns: GridColDef[] = [
     {
@@ -33,29 +36,27 @@ const SmallTable: FunctionComponent<Props> = (props) => {
     }
   ]
 
-  const fetchLeagueTable = () => {
-    axios.get('http://localhost:8080/api/football-teams', {
-      headers: {
-        "Authorization": "Bearer " + token,
-        "Access-Control-Allow-Origin": "*",
-        "Content-Type": "application/json"
-      }
-    })
-      .then(res => {
-        console.log(res.data);
-        setLeagueStandings(res.data);
+  const fetchLeagueTable = (token: string | null) => {
+    TeamsService.getFootballTeams()
+      .then(teams => {
+        // console.log(res.data);
+        setLeagueStandings(teams);
         logging.info('The League Table has been successfully fetched')
       })
-      .catch(err => logging.error(err));
+      .catch(err => {
+        err.request.status === 401 ? navigate('/sign-in'): logging.error(err);
+      });
   }
 
   useEffect(()=> {
     logging.info('Loading small table data....');
-    fetchLeagueTable();
+    fetchLeagueTable(AuthService.getCurrentUser());
   }, []) // passing empty array as a second argument to Use Effect prevents the method to call
   // fetchLeagueTable multiple times.
 
-  const rows = leagueStandings.map((team: FootballTeam) => {
+
+
+  const rows: SmallTableRecord[] | any = leagueStandings.map((team: FootballTeam) => {
       return {
         id: team.tablePosition,
         teamName: team.name,
@@ -68,10 +69,16 @@ const SmallTable: FunctionComponent<Props> = (props) => {
     <DataGrid
       rows={rows}
       columns={columns}
+      autoHeight={true}
+      disableExtendRowFullWidth={true}
+      hideFooterSelectedRowCount={true}
+      initialState={{
+        sorting: {
+          sortModel: [{field: 'points', sort: 'desc'}]
+        }
+      }}
     />
     )
-
-
 }
 
 

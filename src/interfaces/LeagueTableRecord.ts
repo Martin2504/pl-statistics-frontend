@@ -1,25 +1,9 @@
 export default interface LeagueTableRecord {
-  createdAt: string;
-  updatedAt: string;
-  id: number;
-  footballTeam: number;
-  seasonGoalsHome: number;
-  seasonConceded: number;
-  seasonGoalsAway: number;
-  seasonConcededAway: number;
-  seasonConcededHome: number;
-  seasonGoals: number;
+  id: string;
+  teamName: string;
   points: number;
-  ppgOverall: number;
-  seasonGoalDifference: number;
-  seasonWinsHome: number;
-  seasonWinsAway: number;
-  seasonWinsOverall: number;
-  seasonDrawsHome: number;
-  seasonDrawsAway: number;
-  seasonDrawsOverall: number;
-  seasonLosses_away: number;
-  seasonLosses_home: number;
-  seasonLosses_overall: number;
-  matchesPlayed: number;
+  totalGames: number;
+  totalWins: number;
+  totalDraws: number;
+  totalLosses: number;
 }

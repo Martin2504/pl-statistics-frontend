@@ -4,8 +4,6 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
@@ -13,6 +11,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AuthService from "../services/AuthService";
+import {useNavigate} from "react-router-dom";
 
 function Copyright(props: any) {
     return (
@@ -31,12 +31,26 @@ const theme = createTheme();
 
 const SignIn: React.FunctionComponent<IPage> = (props) => {
 
+    const navigate = useNavigate();
+
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         // eslint-disable-next-line no-console
+
+        const username: FormDataEntryValue | null = data.get('username');
+        const password: FormDataEntryValue | null = data.get('password');
+
+        const response = AuthService.login(username !== null ? username.toString() : '',
+          password !== null ? password.toString() : '')
+          .then((data) => {
+              navigate('/');
+          })
+
+        // AuthService.getCurrentUser() === null;
+
         console.log({
-            email: data.get('email'),
+            username: data.get('username'),
             password: data.get('password'),
         });
     };
@@ -64,10 +78,10 @@ const SignIn: React.FunctionComponent<IPage> = (props) => {
                             margin="normal"
                             required
                             fullWidth
-                            id="email"
-                            label="Email Address"
-                            name="email"
-                            autoComplete="email"
+                            id="username"
+                            label="Username"
+                            name="username"
+                            autoComplete="username"
                             autoFocus
                         />
                         <TextField
@@ -80,10 +94,6 @@ const SignIn: React.FunctionComponent<IPage> = (props) => {
                             id="password"
                             autoComplete="current-password"
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
                         <Button
                             type="submit"
                             fullWidth
@@ -93,11 +103,6 @@ const SignIn: React.FunctionComponent<IPage> = (props) => {
                             Sign In
                         </Button>
                         <Grid container>
-                            <Grid item xs>
-                                <Link href="#" variant="body2">
-                                    Forgot password?
-                                </Link>
-                            </Grid>
                             <Grid item>
                                 <Link href="/sign-up" variant="body2">
                                     {"Don't have an account? Sign Up"}

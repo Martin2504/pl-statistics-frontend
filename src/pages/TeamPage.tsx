@@ -3,6 +3,8 @@ import IPage from "../interfaces/page";
 import logging from "../config/logging";
 import axios from "axios";
 import {Link} from "react-router-dom";
+import LeagueTable from "./LeagueTable";
+import TeamComponent from "./components/TeamComponent";
 
 const TeamPage: React.FunctionComponent<IPage> = props => {
 
@@ -24,14 +26,7 @@ const TeamPage: React.FunctionComponent<IPage> = props => {
     }, [props]);
 
     return (
-        <div className="team-page">
-            <p>Team ID: {team.id}</p> <br />
-            <p>Team Name: {team.teamName}</p> <br />
-            <p>Team Address: {team.address}</p> <br />
-            <Link to="/teams-table" >Go Back to Team Table</Link>
-            <br />
-            <Link to="/" >Go Back to Home Page</Link>
-        </div>
+        <TeamComponent name={"team-view"} />
     )
 }
 

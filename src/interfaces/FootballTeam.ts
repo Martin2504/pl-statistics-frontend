@@ -1,10 +1,10 @@
-import LeagueTableRecord from "./LeagueTableRecord";
+import TeamStats from "./TesmStats";
 
 export default interface FootballTeam {
     createdAt: string;
     updatedAt: string;
     id: number;
-    leagueTableRecord: LeagueTableRecord;
+    leagueTableRecord: TeamStats;
     externalId: number;
     name: string;
     cleanName: string;

@@ -26,14 +26,20 @@ const LayoutComponent: FunctionComponent<ILayoutProps> = (props) => {
     <ThemeProvider theme={plTheme}>
       <Container sx={{display: 'flex'}} style={{
         backgroundColor: '#EEE',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        height: '100vh'
       }}>
         <CssBaseline/>
-        <Grid item xs={12} className={'header-wrapper'} >
+        <Grid item xs={12} className={'header-wrapper'} style={{
+          height: '150px',
+        }}>
           <Header />
         </Grid>
         <br />
-        <Grid item xs={12} className={'content'}  >
+        <Grid item xs={12} className={'content'} style={{
+          height: '100%',
+          padding: '20px'
+        }} >
           <Outlet/>
         </Grid>
       </Container>
