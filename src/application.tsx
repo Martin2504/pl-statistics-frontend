@@ -4,7 +4,6 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import LayoutComponent from "./pages/LayoutComponent";
 import HomePage from "./pages/HomePage";
 import LeagueTable from "./pages/LeagueTable";
-import TeamPage from "./pages/TeamPage";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 
@@ -22,7 +21,7 @@ const Application: React.FunctionComponent<{}> = props => {
                         <Route index element={<HomePage name={'Home Page'} />} />
                         <Route path="league-table" >
                             <Route index element={<LeagueTable name={'League Table'} />} />
-                            <Route path=":teamId" element={<TeamPage name={'League Table'} />} />
+                            {/*<Route path=":teamId" element={<TeamPage name={'League Table'} />} />*/}
                         </Route>
                     </Route>
                     <Route path="/sign-in" element={<SignIn name={"sign-in"} />} />

@@ -1,4 +1,4 @@
-import React, {FunctionComponent, useEffect, useState} from 'react';
+import React, {FunctionComponent, useContext, useEffect, useState} from 'react';
 import {DataGrid, GridColDef} from '@mui/x-data-grid';
 import FootballTeam from "../../interfaces/FootballTeam";
 import logging from "../../config/logging";
@@ -6,6 +6,7 @@ import SmallTableRecord from "../../interfaces/SmallTableRecord";
 import {useNavigate} from "react-router-dom";
 import AuthService from "../../services/AuthService";
 import TeamsService from "../../services/TeamsService";
+import {Context} from "../../config/Context";
 
 interface OwnProps {
 }
@@ -17,6 +18,7 @@ const SmallTable: FunctionComponent<Props> = (props) => {
   const navigate = useNavigate();
 
   const [leagueStandings, setLeagueStandings] = useState<FootballTeam[]>([]);
+  const {toggleSelectedTeamId} = useContext(Context);
 
   const columns: GridColDef[] = [
     {
@@ -60,25 +62,30 @@ const SmallTable: FunctionComponent<Props> = (props) => {
       return {
         id: team.tablePosition,
         teamName: team.name,
-        points: team.leagueTableRecord.points
+        points: team.leagueTableRecord.points,
+        internalId: team.id
       }
     }
   )
 
   return (
-    <DataGrid
-      rows={rows}
-      columns={columns}
-      autoHeight={true}
-      disableExtendRowFullWidth={true}
-      hideFooterSelectedRowCount={true}
-      initialState={{
-        sorting: {
-          sortModel: [{field: 'points', sort: 'desc'}]
-        }
-      }}
-    />
-    )
+
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          autoHeight={true}
+          disableExtendRowFullWidth={true}
+          hideFooterSelectedRowCount={true}
+          initialState={{
+            sorting: {
+              sortModel: [{field: 'points', sort: 'desc'}]
+            }
+          }}
+          onRowClick={(param, event) => {
+            toggleSelectedTeamId(param.row.internalId);
+          } }
+        />
+  )
 }
 
 

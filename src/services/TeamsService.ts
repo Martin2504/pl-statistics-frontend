@@ -11,6 +11,11 @@ class TeamsService {
     return data;
   }
 
+  async fetchSingleTeam(id: string): Promise<FootballTeam> {
+    const {data} = await axios.get<FootballTeam, AxiosResponse>(API_URL + 'football-teams/' + id, {headers: authHeader()});
+    return data;
+  }
+
 }
 
 export default new TeamsService();

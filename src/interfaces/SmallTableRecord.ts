@@ -1,5 +1,6 @@
 export default interface SmallTableRecord {
   teamName: string;
   id: string;
-  points: number
+  points: number;
+  internalId: string;
 }

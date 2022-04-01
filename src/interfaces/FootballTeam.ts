@@ -1,4 +1,4 @@
-import TeamStats from "./TesmStats";
+import TeamStats from "./TeamStats";
 
 export default interface FootballTeam {
     createdAt: string;

@@ -1,4 +1,4 @@
-export default interface TesmStats {
+export default interface TeamStats {
   createdAt: string;
   updatedAt: string;
   id: number;

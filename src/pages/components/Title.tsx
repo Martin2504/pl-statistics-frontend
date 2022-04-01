@@ -10,7 +10,7 @@ type Props = OwnProps;
 const Title: FunctionComponent<Props> = (props) => {
 
   return (
-    <Typography component="h2" variant="h6" color="primary" style={{textAlign: 'center'}}>
+    <Typography component="h1" variant="h3" color="primary" style={{textAlign: 'center', margin: '30px 0'}}>
         {props.title}
     </Typography>
   );
